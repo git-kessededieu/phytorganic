@@ -1,0 +1,35 @@
+{% load static %}
+<!-- JavaScripts -->
+<script src="{% static 'frontend/js/vendors/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/wow.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/bootstrap.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/own-menu.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/flexslider/jquery.flexslider-min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/jquery.countTo.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/jquery.isotope.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/jquery.bxslider.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/owl.carousel.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/jquery.sticky.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/color-switcher.js' %}"></script>
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="{% static 'frontend/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'frontend/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'frontend/js/zap.js' %}"></script>
+<script type="text/javascript" src="{% static 'frontend/js/vendors/sweetalert2.all.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'backend/js/member.min.js' %}"></script>
+
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    {% for message in messages %}
+        Toast.fire({
+            type: "{{ message.tags }}",
+            title: "{{ message }}"
+        });
+    {% endfor %}
+</script>

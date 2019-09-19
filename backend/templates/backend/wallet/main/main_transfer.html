@@ -1,0 +1,77 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-money"></i> {{ page_info }} (Balance : ${{ balance.balance|intcomma|default:0 }})</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <form method="post" class="form-horizontal {{ module }}">
+                        {% csrf_token %}
+                        <div class="container-fluid">
+                            <fieldset>
+                                <legend>Transfer Infos</legend>
+
+                                <div class="form-group">
+                                    <label for="username" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+                                        Receiver Account
+                                    </label>
+                                    <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <div class="input-group">
+                                            <input type="text" name="username" id="username" class="form-control"
+                                                   placeholder="Probatisseur" style="height: 38px; padding: 6px 16px;">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-small check_username" type="button"
+                                                        style="font-size: 13px; padding: 9px 14px;">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <label class="error" for="username"></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Member Name </label>
+                                    <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <div class="member_name"><strong></strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="amount" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Amount
+                                        <small>(required)</small></label>
+                                    <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="text" name="amount" id="amount" class="form-control"
+                                               placeholder="100$">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="security_code" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Security
+                                        Code</label>
+                                    <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="password" name="security_code" id="security_code"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <button type="submit" class="btn btn-small">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

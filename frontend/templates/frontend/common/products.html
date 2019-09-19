@@ -1,0 +1,46 @@
+{% extends 'frontend/layouts/index.html' %}
+{% load static %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="sub-banner animated fadeIn" style="background:center / cover url(/static/frontend/images/products/products.jpg) fixed no-repeat">
+        <div class="container">
+            <div class="position-center-center">
+                <h2>{{ page_title }}</h2>
+
+                <!--======= Breadcrumb =========-->
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'frontend:home' %}">Home</a></li>
+                    <li class="active">{{ page_title }}</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="portfolio port-wrap padding-top-80 animate fadeInUp" data-wow-delay="0.4s">
+        <!-- PRODUCTS ITEMS -->
+        <div class="items row col-3 animate fadeInUp" data-wow-delay="0.4s">
+            {% for product in product_list %}
+                <!-- ITEM -->
+                <article class="portfolio-item">
+                    <div class="portfolio-image">
+                        <a href="{% url 'frontend:product' product.slug %}">
+                            <img alt="{{ product }}" src="{% if product.image %}
+                                                            {{ product.image.url }}
+                                                            {% else %}
+                                                            {% static 'frontend/images/portfolio/1/portfolio-1.png' %}
+                                                            {% endif %}">
+                        </a>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <div class="position-center-center">
+                            <h3><a href="{% url 'frontend:product' product.slug %}">{{ product }}</a></h3>
+                            <span class="margin-top-25"></span>
+                            <a href="{% url 'frontend:product' product.slug %}" class="go margin-top-50"><i class="ion-ios-arrow-thin-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

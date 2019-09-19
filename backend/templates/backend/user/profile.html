@@ -1,0 +1,38 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-pencil"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <form action="{{ object.get_absolute_url }}" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <label for="id_last_name" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+                                    Name </label>
+                                <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    {{ object.full_name }}
+                                </div>
+                            </div>
+                            {% crispy form %}
+                            <button type="submit" class="btn btn-small">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

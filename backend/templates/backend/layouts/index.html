@@ -1,0 +1,62 @@
+{% load static %}
+{% load render_partial %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="YOUP LAB"/>
+    <!-- Document Title -->
+    <title>{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %} | phytorganic.net</title>
+    {% include 'backend/partials/inc.css.html' %}
+</head>
+<body>
+<!-- LOADER ===========================================-->
+<div id="loader">
+    <div class="loader">
+        <div class="position-center-center"><img src="{% static 'frontend/images/logo/logo.png' %}" width="150" alt="">
+            <p class="font-crimson text-center">Please Wait...</p>
+            <div class="loading">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page Wrapper -->
+<div id="wrap">
+
+    <!-- Top bar -->
+    {% include 'backend/partials/top-bar.html' %}
+
+    <!-- Header -->
+    {% comment %}{% include 'backend/partials/header.html' %}{% endcomment %}
+    {% render_partial 'backend:dashboard-menu' page_name=page_name %}
+    <!-- End Header -->
+
+    {% if page_name == "home" %}
+        <!--======= HOME MAIN SLIDER =========-->
+        {% include 'backend/partials/home-slider.html' %}
+    {% endif %}
+
+    <!-- Content -->
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- End Content -->
+
+    <!-- Footer -->
+    {% include 'backend/partials/footer.html' %}
+    <!-- End Footer -->
+
+    <!-- GO TO TOP -->
+    <a href="#" class="cd-top"><i class="fa fa-angle-up"></i></a>
+    <!-- GO TO TOP End -->
+</div>
+<!-- End Page Wrapper -->
+
+{% include 'backend/partials/inc.js.html' %}
+</body>
+</html>

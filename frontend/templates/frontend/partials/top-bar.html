@@ -1,0 +1,62 @@
+{% load static %}
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="logo col-sm-2 col-md-2 col-lg-2 col-xs-6">
+                    <a href="{% url "frontend:home" %}"><img src="{% static 'frontend/images/logo/logo.png' %}"
+                                                             width="100" alt=""></a>
+                </div>
+                <div class="top-menu col-sm-10 col-md-10 col-lg-10">
+                    <div class="col-xs-6 col-sm-2 col-md-2">
+                        <select class="" data-width="fit">
+                            <option value="EN">English</option>
+                            <option value="FR">French</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5 hidden-xs hidden-sm hidden-md">
+                        <ul class="row">
+                            <li class="margin-right-10">
+                                <a href="#"> How it works</a>
+                            </li>
+                            <li class="margin-right-10">
+                                <a href="#"> Getting Started</a>
+                            </li>
+                            <li class="margin-right-10">
+                                <a href="#"> About PhytOrganic</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 col-xs-12">
+                        <ul class="row">
+                            <div class="col-sm-12">
+                                {% if user.is_authenticated %}
+                                    <li class="subcribe">
+                                        <button type="button" class="btn btn-small" data-toggle="modal"
+                                                data-target="#migrationModal">MIGRATION
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'logout' %}?next=/" class="btn btn-small"> Logout</a>
+                                    </li>
+                                {% else %}
+                                    <li class="subcribe">
+                                        <button type="button" class="btn btn-small" data-toggle="modal"
+                                                data-target="#migrationModal">MIGRATION
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'login' %}?next=/dashboard/" class="btn btn-small"> Login</a>
+                                    </li>
+                                    {% comment %}<li>
+                                    <button class="btn btn-small"> SignUp</button>
+                                </li>{% endcomment %}
+                                {% endif %}
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-shopping-cart"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="table-responsive">
+                        <!-- Table -->
+                        <table class="table table-bordered">
+                            <tbody>
+                            {% for pack in pack_list %}
+                                <tr>
+                                    <th>{{ pack.name }}</th>
+                                    <td>${{ pack.price }}</td>
+                                    <td>{{ pack.bv }} BV</td>
+                                    <td>{{ pack.qty }}</td>
+                                    <td>
+                                        <button class="btn btn-small popover buy_maintenance"
+                                                data-pack_id="{{ pack.id }}">
+                                            Buy
+                                        </button>
+                                        <div id="popover-head" class="hide">
+                                            Security Code
+                                        </div>
+                                        <div id="popover-content" class="hide">
+                                            <form action="{% url 'backend:maintenance' %}" method="post"
+                                                  class="form-horizontal">
+                                                {% csrf_token %}
+                                                <div class="container-fluid">
+                                                    <input type="password" name="security_code" class="form-control">
+                                                    <input type="hidden" name="pack_id" value="{{ pack.id }}">
+                                                    <br>
+                                                    <button type="submit" class="btn btn-small">Confirm</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

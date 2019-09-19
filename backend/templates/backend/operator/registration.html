@@ -1,0 +1,310 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-check"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="wizard">
+                        <!--        Wizard container        -->
+                        <div class="wizard-container">
+                            <div class="card wizard-card" data-color="green" id="wizardProfile">
+                                <form action="#" method="post" id="register_wizard" class="form-horizontal">
+                                    {% csrf_token %}
+                                    <div class="wizard-header">
+                                        <h3>
+                                            <b>REGISTER</b> A NEW ACCOUNT <br>
+                                            <small>Fill the wizard to register a new member.</small>
+                                        </h3>
+                                    </div>
+
+                                    <div class="wizard-navigation">
+                                        <ul>
+                                            <li><a href="#placement-infos" data-toggle="tab">Placement Infos</a></li>
+                                            <li><a href="#personal-infos" data-toggle="tab">Personal Infos</a></li>
+                                            <li><a href="#order-infos" data-toggle="tab">Order Infos</a></li>
+                                            <li><a href="#payment-infos" data-toggle="tab">Payment</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="placement-infos">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <div class="form-row sponsor">
+                                                        {{ form.sponsor|as_crispy_field }}
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <fieldset>
+                                                        <legend>Placement Information</legend>
+                                                        <div class="form-row placement_name">
+                                                            {{ form.placement_name|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row placement_mode">
+                                                            {{ form.placement_mode|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="personal-infos">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <fieldset class="form-group">
+                                                        <legend>SPONSOR INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <label for="w_sponsor">Direct Sponsor : </label>
+                                                            <span class="w_sponsor"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label for="w_sponsor_name">Name : </label>
+                                                            <span class="w_sponsor_name"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <fieldset class="form-group">
+                                                        <legend>LOGIN INFORMATION</legend>
+                                                        <div class="form-row username">
+                                                            {{ form.username|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <fieldset class="form-group">
+                                                        <legend>PERSONAL INFORMATION</legend>
+                                                        <div class="form-row first_name">
+                                                            {{ form.first_name|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row last_name">
+                                                            {{ form.last_name|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row paper_id">
+                                                            {{ form.paper_id|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row gender">
+                                                            {{ form.gender|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row birth_date select_date">
+                                                            {{ form.birth_date|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row email">
+                                                            {{ form.email|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row contact">
+                                                            {{ form.contact|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row residential_country">
+                                                            {{ form.residential_country|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row address_1">
+                                                            {{ form.address_1|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row address_2">
+                                                            {{ form.address_2|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row post_code">
+                                                            {{ form.post_code|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row city">
+                                                            {{ form.city|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row state">
+                                                            {{ form.state|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row country">
+                                                            {{ form.country|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="order-infos">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <div class="form-group">
+                                                        <div class="form-row">
+                                                            <span>Green Wallet 1 : <strong class="wallet1"
+                                                                                           data-value="{{ wallet.wallet1|default:0 }}">${{ wallet.wallet1|default:0 }}</strong></span>
+                                                            <br>
+                                                            <span>Green Wallet 2 : <strong class="wallet2"
+                                                                                           data-value="{{ wallet.wallet2|default:0 }}">${{ wallet.wallet2|default:0 }}</strong></span>
+                                                        </div>
+                                                    </div>
+                                                    <fieldset class="form-group">
+                                                        <legend>DELIVERY INFORMATION</legend>
+                                                        <div class="form-row delivery_method">
+                                                            {{ order_form.delivery_method|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                        <div class="form-row payment_mode">
+                                                            {{ order_form.payment_mode|as_crispy_field }}
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>ORDER INFORMATION</legend>
+                                                        <div class="form-row pack">
+                                                            <label for="id_pack"
+                                                                   class="control-label col-xs-4 col-sm-4 col-md-4 col-lg-4 requiredField">
+                                                                Pack <span class="asteriskField">*</span>
+                                                            </label>
+                                                            <div class="controls col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                                                <select name="pack" id="id_pack"
+                                                                        class="form-control">
+                                                                    {% for pack in packs %}
+                                                                        <option value="{{ pack.id }}">{{ pack }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="payment-infos">
+                                            <div class="row">
+                                                <div class="col-sm-8 col-sm-offset-2">
+                                                    <fieldset class="form-group">
+                                                        <legend>MEMBER INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <label>Username : </label>
+                                                            <span class="w_username"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Name : </label>
+                                                            <span class="w_name"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>SPONSOR INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <label>Direct Sponsor : </label>
+                                                            <span class="w_sponsor"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Name : </label>
+                                                            <span class="w_sponsor_name"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>PLACEMENT INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <label>Username : </label>
+                                                            <span class="w_placement"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Name : </label>
+                                                            <span class="w_placement_name"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Team : </label>
+                                                            <span class="w_placement_mode"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>DELIVERY ADDRESS</legend>
+                                                        <div class="form-row">
+                                                            <label>Payment Mode : </label>
+                                                            <span class="w_payment_mode"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Delivery Method : </label>
+                                                            <span class="w_delivery_method"><strong></strong></span>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <label>Country : </label>
+                                                            <span class="w_country"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>ORDER INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <label>Product : </label>
+                                                            <span class="w_pack"><strong></strong></span>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <legend>PAYMENT INFORMATION</legend>
+                                                        <div class="form-row">
+                                                            <span>Green Wallet 1 Balance : <strong
+                                                                    class="wallet1_balance"
+                                                                    data-value="{{ wallet.wallet1|default:0 }}">${{ wallet.wallet1|default:0 }}</strong></span>
+                                                            <br>
+                                                            <span>Green Wallet 2 Balance : <strong
+                                                                    class="wallet2_balance"
+                                                                    data-value="{{ wallet.wallet2|default:0 }}">${{ wallet.wallet2|default:0 }}</strong></span>
+                                                        </div>
+                                                        <div id="div_id_security_code" class="form-row">
+                                                            <label for="id_security_code"
+                                                                   class="control-label requiredField">
+                                                                Security Code <span class="asteriskField">*</span>
+                                                            </label>
+                                                            <div class="controls">
+                                                                <input type="password" name="security_code"
+                                                                       class="form-control" required
+                                                                       id="id_security_code">
+                                                                <span class="help-block"></span>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wizard-footer height-wizard">
+                                        <div class="pull-right">
+                                            <input type='button'
+                                                   class='btn btn-next btn-fill btn-success btn-wd btn-sm'
+                                                   name='next' value='Next'/>
+                                            <input type='button'
+                                                   class='btn btn-finish btn-fill btn-success btn-wd btn-sm'
+                                                   name='finish' value='Finish'/>
+                                        </div>
+
+                                        <div class="pull-left">
+                                            <input type='button'
+                                                   class='btn btn-previous btn-fill btn-default btn-wd btn-sm'
+                                                   name='previous' value='Previous'/>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--        Wizard Container        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load utils %}
+{% with active=page_name %}
+    <!-- Modal -->
+    <div class="modal fade" id="migrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="migrationModalLabel">Migration Form</h4>
+                </div>
+                <form action="{% url 'frontend:member-migration' %}" method="POST" class="form-horizontal member_form">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="form-row last_name">
+                                {{ form.last_name|as_crispy_field }}
+                            </div>
+                            <div class="form-row first_name">
+                                {{ form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="form-row username">
+                                {{ form.username|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-row contact">
+                                {{ form.contact|as_crispy_field }}
+                            </div>
+                            <div class="form-row email">
+                                {{ form.email|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-row sponsor">
+                                {{ form.sponsor|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-row placement_name">
+                                {{ form.placement_name|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-row placement_mode">
+                                {{ form.placement_mode|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                            <div class="form-row grade">
+                                {{ form.grade|as_crispy_field }}
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-small gray-border" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-small">Submit</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <header class="header">
+        <div class="sticky">
+            <div class="container">
+                <!-- Nav -->
+                <nav>
+                    <ul id="ownmenu" class="ownmenu">
+                        <li class="{% if active|in_list:'home' %}active{% endif %}">
+                            <a href="{% url 'frontend:home' %}">HOME</a>
+                            {% comment %}<ul class="dropdown animated-3s fadeInUp">
+                                <li><a href="#">Why You ? - Why Now ?</a></li>
+                                <li><a href="main_coporate_1.html">A Vastly Untapped Potential</a></li>
+                                <li><a href="main_creative_2.html">Transform your life with PhytOrganic</a></li>
+                            </ul>{% endcomment %}
+                        </li>
+                        <li class="{% if active|in_list:'about,our_vision,our_mission,our_goal,our_values,contact_us' %}active{% endif %}">
+                            <a href="{% url 'frontend:about' %}">About Us</a>
+                            <ul class="dropdown animated-3s fadeInUp">
+                                <li><a href="{% url 'frontend:about' %}#our-vision">Our Vision</a></li>
+                                <li><a href="{% url 'frontend:about' %}#our-mission">Our Mission</a></li>
+                                <!-- <li><a href="{% url 'frontend:about' %}#">Our Goal</a></li> -->
+                                <li><a href="{% url 'frontend:about' %}#our-values">Our Values</a></li>
+                                <li><a href="{% url 'frontend:about' %}#contact-us">Contact Us</a></li>
+                            </ul>
+                        </li>
+                        <li class="{% if active|in_list:'our_vision,our_mission,our_goal,our_values,contact_us' %}active{% endif %}">
+                            <a href="#">Training</a>
+                            <ul class="dropdown animated-3s fadeInUp">
+                                <li><a href="#">Leadership and Management</a></li>
+                                <li><a href="#">Personal Development</a></li>
+                                <li><a href="#">Personal Finances</a></li>
+                                <li><a href="#">Multi-Level Marketing</a></li>
+                            </ul>
+                        </li>
+                        <li class="{% if active|in_list:"products,product" %}active{% endif %}">
+                            <a href="#">Our Products</a>
+                            <!--======= MEGA MENU =========-->
+                            <div class="megamenu full-width animated-3s fadeInUp">
+                                <div class="row nav-post">
+                                    {% for product in products %}
+                                        <div class="col-sm-2">
+                                            <a href="{% url 'frontend:product' product.slug %}"><h6>{{ product.name }}</h6></a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="{% if active|in_list:'pictures,videos,audios_podcasts' %}active{% endif %}">
+                            <a href="#">Our Gallery</a>
+                            <ul class="dropdown animated-3s fadeInUp">
+                                <li><a href="#">Pictures</a></li>
+                                <li><a href="#">Videos</a></li>
+                                <li><a href="#">Audios and Podcasts</a></li>
+                            </ul>
+                        </li>
+                        <li class="{% if active|in_list:'faq' %}active{% endif %}">
+                            <a href="{% url 'frontend:faq' %}">F.A.Q.</a>
+                        </li>
+                        <li class="{% if active|in_list:'calendar,presentations,tours' %}active{% endif %}">
+                            <a href="#">Our Events</a>
+                            <ul class="dropdown animated-3s fadeInUp">
+                                <li><a href="#">Calendar</a></li>
+                                <li><a href="#">Presentations</a></li>
+                                <li><a href="#">Tours</a></li>
+                            </ul>
+                        </li>
+                        <li class="#">
+                            <a href="#">The Green Foundation</a>
+                        </li>
+
+                        <!--======= SEARCH ICON =========-->
+                        <li class="search-nav right"><a href="#"><i class="fa fa-search"></i></a>
+                            <ul class="dropdown animated-3s fadeInUp">
+                                <li>
+                                    <form action="#">
+                                        <input type="search" class="form-control" placeholder="Enter Your Keywords..." required>
+                                        <button type="submit"> SEARCH</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+{% endwith %}

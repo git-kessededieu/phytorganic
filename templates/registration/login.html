@@ -1,0 +1,130 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="YOUP LAB"/>
+    <!-- Document Title -->
+    <title>{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'frontend/favicons/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'frontend/favicons/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'frontend/favicons/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'frontend/favicons/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'frontend/favicons/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'frontend/favicons/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'frontend/favicons/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'frontend/favicons/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'frontend/favicons/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'frontend/favicons/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'frontend/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'frontend/favicons/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'frontend/favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'frontend/favicons/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- FontsOnline -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- StyleSheets -->
+    <link rel="stylesheet" href="{% static 'frontend/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/responsive.css' %}">
+    <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/rs-plugin/css/settings.css' %}" media="screen"/>
+
+    <!-- COLORS -->
+    <link rel="stylesheet" id="color" href="{% static 'frontend/css/colors/green-sea.css' %}">
+
+    <!-- JavaScripts -->
+    <script src="{% static 'frontend/js/vendors/modernizr.js' %}"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="login" class="bg-parallax" style="background:url(/static/frontend/images/coming-soon/bg-1.jpg) no-repeat">
+
+<!-- Page Wrapper -->
+<div id="wrap">
+
+    <!-- Coming Soon -->
+    <div class="coming-soon style-2 bg-parallax padding-top-100 padding-bottom-100">
+        <div class="container">
+            <div class="avatar">
+                <a href="{% url 'frontend:home' %}">
+                    <img src="{% static 'frontend/images/logo/logo.png' %}" alt="" width="250">
+                </a>
+            </div>
+
+            <h3 class="text-white letter-space-3 margin-top-40 margin-bottom-40">Enter your login informations please</h3>
+
+            <div class="col-sm-6 col-sm-offset-3">
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        Votre nom d'utilisateur ou votre mot de passe ne correspond pas, veuillez reessayer !
+                    </div>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            Vous n'&ecirc;tes pas autorisé à accéder à ce contenu.
+                            Merci d'utiliser un accès administrateur.
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            Merci de vous connecter pour accéder à ce contenu.
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                <form action="{% url 'login' %}?next={{ request.GET.next }}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <fieldset>
+                        <div class="container-fluid">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-small">Login</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page Wrapper -->
+
+<!-- JavaScripts -->
+<script src="{% static 'frontend/js/vendors/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'frontend/js/vendors/bootstrap.min.js' %}"></script>
+
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+<script type="text/javascript" src="{% static 'frontend/js/custom.min.js' %}"></script>
+
+</body>
+</html>

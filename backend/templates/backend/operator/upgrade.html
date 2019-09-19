@@ -1,0 +1,134 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-check"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="wizard">
+                        <!--        Wizard container        -->
+                        <div class="wizard-container">
+
+                            <div class="card wizard-card" data-color="green" id="wizardProfile">
+                                <form action="#" method="post" id="activation_wizard">
+                                    {% csrf_token %}
+                                    <div class="wizard-header">
+                                        <h3>
+                                            <b>REGISTER</b> A NEW ACCOUNT <br>
+                                            <small>Fill the wizard to register a new member.</small>
+                                        </h3>
+                                    </div>
+
+                                    <div class="wizard-navigation">
+                                        <ul>
+                                            <li><a href="#w_username" data-toggle="tab">Username</a></li>
+                                            <li><a href="#checkout" data-toggle="tab">Checkout</a></li>
+                                            <li><a href="#payment" data-toggle="tab">Payment</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="w_username">
+                                            <div class="row">
+                                                <h4 class="info-text">Let's verify with the username</h4>
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="w_username">Username
+                                                            <small>(required)</small></label>
+                                                        <input name="w_username" id="w_username" type="text"
+                                                               class="form-control" placeholder="Probatisseur">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="checkout">
+                                            <h4 class="info-text">Let's check out</h4>
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="w_name">Member Name : </label>
+                                                        <span class="w_name"><strong></strong></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="w_amount">Amount
+                                                            <small>(required)</small></label>
+                                                        <input type="text" name="w_amount" id="w_amount"
+                                                               class="form-control" placeholder="100$">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="payment">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h4 class="info-text">Let's process payment</h4>
+                                                </div>
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label for="">Debit Account</label>
+                                                            <div class="input-group">
+                                                                <input type="text" name="w_d_account" id="w_d_account"
+                                                                       class="form-control" placeholder="Probatisseur">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-fill btn-success btn-sm check_username"
+                                                                            type="button">
+                                                                        <i class="fa fa-search"
+                                                                           style="padding: 5px 2px;"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label for="">Member Name : </label>
+                                                            <span class="w_d_name"><strong></strong></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row security_code">
+                                                        <div class="form-group">
+                                                            <label for="">Security Code</label>
+                                                            <input type="password" name="w_security_code"
+                                                                   id="w_security_code" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wizard-footer height-wizard">
+                                        <div class="pull-right">
+                                            <input type='button' class='btn btn-next btn-fill btn-success btn-wd btn-sm'
+                                                   name='next' value='Next'/>
+                                            <input type='submit'
+                                                   class='btn btn-finish btn-fill btn-success btn-wd btn-sm'
+                                                   name='finish' value='Finish'/>
+                                        </div>
+
+                                        <div class="pull-left">
+                                            <input type='button'
+                                                   class='btn btn-previous btn-fill btn-default btn-wd btn-sm'
+                                                   name='previous' value='Previous'/>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--        Wizard Container        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

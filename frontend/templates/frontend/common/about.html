@@ -1,0 +1,148 @@
+{% extends 'frontend/layouts/index.html' %}
+{% load static %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="sub-banner animated fadeIn" style="background:url(/static/frontend/images/about/about-us.jpg) fixed no-repeat">
+        <div class="container">
+            <div class="position-center-center">
+                <h2>{{ page_title }}</h2>
+
+                <!--======= Breadcrumb =========-->
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'frontend:home' %}">Home</a></li>
+                    <li class="active">{{ page_title }}</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Intro -->
+    {% comment %}<section class="service-intro padding-top-80 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 animate fadeInLeft" data-wow-delay="0.4s">
+                    <img class="img-responsive" src="{% static 'frontend/images/services/man-img.png' %}" alt="">
+                </div>
+                <div class="col-md-7 animate fadeInRight" data-wow-delay="0.4s">
+                    <h2 class="margin-top-50 margin-bottom-50">We provide best services</h2>
+                    <p class="font-crimson">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                        type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <hr class="balck col-sm-1 float-none">
+                    <h6>JOHN DOE - <span class="font-crimson font-italic">CEO/FOUNDER ZAP</span></h6>
+                </div>
+            </div>
+        </div>
+    </section>{% endcomment %}
+
+    <!-- Parallex -->
+    {% comment %}<section class="bg-parallax padding-top-100 padding-bottom-100 animate fadeInUp" data-wow-delay="0.4s"
+             style="background:url(/static/frontend/images/bg/bg-parallax-1.jpg) fixed no-repeat;">
+        <div class="heading-border text-center margin-top-50 margin-bottom-50">
+            <h2 class="text-uppercase white-text font-bold padding-left-80 padding-right-80 padding-top-20 padding-bottom-20">Parallax Scrolling</h2>
+            <br>
+            <a href="#" class="btn gray-border btn-white text-white margin-top-50">BUY NOW</a>
+        </div>
+    </section>{% endcomment %}
+
+    <!-- Services -->
+    <section class="padding-top-80 padding-bottom-80">
+        <div class="container">
+
+            <!-- OUR MISSION -->
+            <div class="row" id="our-mission">
+                <div class="col-md-6 animate fadeInLeft" data-wow-delay="0.4s">
+                    <!-- Heading -->
+                    <div class="heading-block no-margin-bottom margin-top-30">
+                        <h2 class="margin-bottom-20 margin-top-1 letter-space-2">OUR MISSION</h2>
+                    </div>
+                    <p>
+                        Help families create incredible life experiences with the people they love and care for.
+                        The founders of <span class="phytorganic">PhytOrganic</span> recognize the value of combining their strengths to create a
+                        powerful way to share the core values
+                        ​​of society - strengthening the family, contributing to the community, and ultimately benefiting all of humanity. They have
+                        created a global company combining strong leadership, proven management practices, financial strength and an extensive
+                        distribution network with a focused commitment to scientific research, product development and customer support.
+                    </p>
+                </div>
+                <!-- Image -->
+                <div class="col-md-6 text-right animate fadeInRight" data-wow-delay="0.4s">
+                    <img class="img-responsive" src="{% static 'frontend/images/about/mission.jpg' %}" alt=""></div>
+            </div>
+
+            <!-- OUR VISION -->
+            <div class="row margin-top-50" id="our-vision">
+                <div class="col-md-5 text-left animate fadeInLeft" data-wow-delay="0.4s">
+                    <img class="img-responsive" src="{% static 'frontend/images/about/vision.jpg' %}" alt="">
+                </div>
+                <div class="col-md-7 animate fadeInRight" data-wow-delay="0.4s">
+                    <!-- Heading -->
+                    <div class="heading-block no-margin-bottom margin-top-30">
+                        <h2 class="margin-bottom-20 margin-top-1 letter-space-2">OUR VISION</h2>
+                    </div>
+                    <p>
+                        Set up a platform that meets all the needs of distributors who are the main players in the success of MLM companies. <br>
+                        Becoming the world's leading health, wellness, leadership and personal development company enriching the lives of those who
+                        aspire to be healthy. <br>
+                        To be number 1 of MLM companies in Africa. <br>
+                        Be the world's number 1 MLM company.
+                    </p>
+                </div>
+            </div>
+
+            <!-- OUR VALUES -->
+            <div class="row margin-top-50" id="our-values">
+                <div class="col-md-12 animate fadeInLeft" data-wow-delay="0.4s">
+                    <!-- Heading -->
+                    <div class="heading-block no-margin-bottom margin-top-30">
+                        <h2 class="margin-bottom-20 margin-top-1 letter-space-2">OUR VALUES</h2>
+                    </div>
+                    <p>
+                        Our company is built around strong leadership values that are :
+                    </p>
+                </div>
+                <div class="">
+                    <!-- Icon -->
+                    <div class="col-md-3 animate fadeInLeft" data-wow-delay="0.4s">
+                        <div class="icon-box ib-style-5 ib-center ib-text-alt ib-bordered ib-bordered-white ib-bordered-thin ib-medium ib-circle">
+                            <div class="ib-icon"><i class="fa fa-diamond"></i></div>
+                            <div class="ib-info">
+                                <h4 class="h6">Integrity</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Icon -->
+                    <div class="col-md-3 animate fadeInLeft" data-wow-delay="0.6s">
+                        <div class="icon-box ib-style-5 ib-center ib-text-alt ib-bordered ib-bordered-white ib-bordered-thin ib-medium ib-circle">
+                            <div class="ib-icon"><i class="fa fa-share"></i></div>
+                            <div class="ib-info">
+                                <h4 class="h6">Sharing</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Icon -->
+                    <div class="col-md-3 animate fadeInRight" data-wow-delay="0.4s">
+                        <div class="icon-box ib-style-5 ib-center ib-text-alt ib-bordered ib-bordered-white ib-bordered-thin ib-medium ib-circle">
+                            <div class="ib-icon"><i class="fa fa-thumbs-up"></i></div>
+                            <div class="ib-info">
+                                <h4 class="h6">Exemplarity</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Icon -->
+                    <div class="col-md-3 animate fadeInRight" data-wow-delay="0.6s">
+                        <div class="icon-box ib-style-5 ib-center ib-text-alt ib-bordered ib-bordered-white ib-bordered-thin ib-medium ib-circle">
+                            <div class="ib-icon"><i class="fa fa-trophy"></i></div>
+                            <div class="ib-info">
+                                <h4 class="h6">Work</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load utils %}
+{% with active=page_name %}
+    <nav class="navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false"
+                        aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="{% if active|in_list:'dashboard' %}active{% endif %}"><a href="{% url 'backend:home' %}">Home</a>
+                    </li>
+                    <li class="dropdown {% if active|in_list:'profile,bank_info,change_password,change_security_password' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            Personal Details <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="{% if active == 'profile' %}active{% endif %}"><a
+                                    href="{% url 'backend:profile' %}">Edit Profile</a></li>
+                            <li class="{% if active == 'bank_info' %}active{% endif %}"><a
+                                    href="{% url 'backend:bank-info' %}">Edit Bank Info</a>
+                            </li>
+                            {% comment %}<li><a href="#">Membership Card</a></li>
+                            <li><a href="#">Subscription</a></li>{% endcomment %}
+                            <li role="separator" class="divider"></li>
+                            <li class="{% if active == 'change_password' %}active{% endif %}"><a
+                                    href="{% url 'backend:change-password' %}">Change Password</a></li>
+                            <li class="{% if active == 'change_security_password' %}active{% endif %}"><a
+                                    href="{% url 'backend:change-security-password' %}">Change Security Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown {% if active|in_list:'sponsor_genealogy,placement_genealogy,direct_downline' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            Genealogy <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="{% if active == 'sponsor_genealogy' %}active{% endif %}"><a
+                                    href="{% url 'backend:sponsor-genealogy' %}">Sponsor Genealogy</a></li>
+                            <li class="{% if active == 'placement_genealogy' %}active{% endif %}"><a
+                                    href="{% url 'backend:placement-genealogy' %}">Placement Genealogy</a></li>
+                            <li class="{% if active == 'direct_downline' %}active{% endif %}"><a
+                                    href="{% url 'backend:direct-downline' %}">Direct Downline</a></li>
+                        </ul>
+                    </li>
+                    {% if user.member.grade == "diamond" %}
+                        <li class="dropdown {% if active|in_list:'register,upgrade,activation' %}active{% endif %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                Operator <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="{% if active == 'register' %}active{% endif %}"><a
+                                        href="{% url 'backend:register' %}">Register</a></li>
+                                <li class="{% if active == 'upgrade' %}active{% endif %}"><a
+                                        href="{% url 'backend:upgrade' %}">Upgrade</a></li>
+                                <li class="{% if active == 'activation' %}active{% endif %}"><a
+                                        href="{% url 'backend:activation' %}">Activation</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                    <li class=""><a href="#">News</a></li>
+                    <li class="dropdown {% if active|in_list:'maintenance' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            Store <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="{% if active == 'maintenance' %}active{% endif %}"><a
+                                    href="{% url 'backend:maintenance' %}">Maintenance</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown {% if active|in_list:'member_transfer,wallet1_transactions,wallet2_transactions' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            My Wallet <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="{% if active == 'member_transfer' %}active{% endif %}">
+                                <a href="{% url 'wallet:member-transfer' %}">Transfer</a>
+                            </li>
+                            <li class="{% if active == 'wallet1_transactions' %}active{% endif %}">
+                                <a href="{% url 'wallet:member-transactions' 'wallet1' %}">Wallet 1 Transactions</a>
+                            </li>
+                            <li class="{% if active == 'wallet2_transactions' %}active{% endif %}">
+                                <a href="{% url 'wallet:member-transactions' 'wallet2' %}">Wallet 2 Transactions</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% if user.is_superuser %}
+                        <li class="dropdown {% if active|in_list:'main_deposit,main_transfer,main_transactions' %}active{% endif %}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">
+                                Main Wallet Management <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="{% if active == 'main_deposit' %}active{% endif %}">
+                                    <a href="{% url 'wallet:main-deposit' %}">Deposit</a>
+                                </li>
+                                <li class="{% if active == 'main_transfer' %}active{% endif %}">
+                                    <a href="{% url 'wallet:main-transfer' %}">Transfer</a>
+                                </li>
+                                <li class="{% if active == 'main_transactions' %}active{% endif %}">
+                                    <a href="{% url 'wallet:main-transactions' %}">Transactions</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}?next=/" class="btn" style="color: black">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}?next=/dashboard/" class="btn" style="color: black">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+{% endwith %}

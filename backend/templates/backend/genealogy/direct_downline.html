@@ -1,0 +1,55 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-group"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="table-responsive">
+                        <!-- Table -->
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td>Total Downline on Left : {{ left_side.count }}</td>
+                            </tr>
+                            <tr>
+                                <th>Left</th>
+                            </tr>
+                            {% for left in left_side %}
+                                <tr>
+                                    <td>{{ left.username }} / {{ left.get_grade_display }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="table-responsive">
+                        <!-- Table -->
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td>Total Downline on Right : {{ right_side.count }}</td>
+                            </tr>
+                            <tr>
+                                <th>Right</th>
+                            </tr>
+                            {% for right in right_side %}
+                                <tr>
+                                    <td>{{ right.username }} / {{ right.get_grade_display }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

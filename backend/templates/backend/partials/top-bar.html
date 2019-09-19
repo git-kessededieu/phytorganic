@@ -1,0 +1,22 @@
+{% load static %}
+<div class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="logo col-sm-2 col-md-2 col-lg-2 col-xs-7">
+                    <a href="{% url "frontend:home" %}">
+                        <img src="{% static 'frontend/images/logo/logo.png' %}" width="100" alt="">
+                    </a>
+                </div>
+                <div class="top-menu col-sm-10 col-md-10 col-lg-10">
+                    <div class="col-xs-4 col-sm-2 col-md-2">
+                        <select class="" data-width="fit">
+                            <option value="EN">English</option>
+                            <option value="FR">French</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

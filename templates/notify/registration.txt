@@ -1,0 +1,10 @@
+Welcome to Phytorganic,
+
+You have been successfully registered,
+Your username is {{ username }} and password : {{ password }}.
+Please immediate change your login password and and create your e-wallet password.
+
+If you need help at any time, please contact us by replying this message to info@phytorganic.net. For questions please
+do not hesitate to send us a message or email.
+
+Regards.

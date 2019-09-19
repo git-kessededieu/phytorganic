@@ -1,0 +1,9 @@
+Hello {{ username }}, \n\n
+
+Your account have been successfully activated, \n
+Your username is {{ username }} and password : {{ password }}. \n\n
+
+If you need help at any time, please contact us by replying this message to info@phytorganic.net. For questions please
+do not hesitate to send us a message or email. \n\n
+
+Regards.

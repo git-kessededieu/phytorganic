@@ -1,0 +1,14 @@
+Welcome to Phytorganic, \n\n
+
+Your account have been successfully created, \n
+Your username is {{ username }}, password : {{ password }} and your personal link is:
+http://www.phytorganic.net/{{ username }} \n\n
+
+To activate this account please make your first purchase of 25 BV. \n
+
+Please immediate change your login password and and create your e-wallet password. \n
+
+If you need help at any time, please contact us by replying this message to info@phytorganic.net. \n
+For questions please do not hesitate to send us a message or email. \n\n
+
+Regards.

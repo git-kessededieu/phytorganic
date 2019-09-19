@@ -1,0 +1,52 @@
+<div class="panel panel-success counters">
+    <div class="panel-heading text-center">
+        <h3 class="panel-title">{{ member_counter.counter }}</h3>
+        {% comment %}<font size="2px">Note : For computation of Booster Fast Start bonus, matched
+                                Platinum's PP will not be counted in the group of 1390PP.
+                            </font>{% endcomment %}
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center counter_table">
+            <tbody>
+            <tr>
+                <td align="center">
+                    <!-- Countdown-->
+                    <ul class="countdown col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2 col-xs-12"
+                        data-start_date="{{ member_counter.start_date|date:"m/j/Y H:i:s" }}"
+                        data-end_date="{{ member_counter.end_date|date:"m/j/Y H:i:s" }}">
+                        <!--======= Days =========-->
+                        <li class="col-sm-4 col-md-4 col-xs-4">
+                            <article class="counter_elt">
+                                <span class="days">00</span>
+                                <p class="days_ref">Days</p>
+                            </article>
+                        </li>
+                        <!--======= Hours =========-->
+                        <li class="col-sm-4 col-md-4 col-xs-4">
+                            <article class="counter_elt">
+                                <span class="hours">00</span>
+                                <p class="hours_ref">Hours</p>
+                            </article>
+                        </li>
+                        <!--======= Mintes =========-->
+                        <li class="col-sm-4 col-md-4 col-xs-4">
+                            <article class="counter_elt">
+                                <span class="minutes">00</span>
+                                <p class="minutes_ref">Minutes</p>
+                            </article>
+                        </li>
+                        <!--======= Seconds =========-->
+                        <li class="col-sm-4 col-md-4 col-xs-4">
+                            <article class="counter_elt">
+                                <span class="seconds">00</span>
+                                <p class="seconds_ref">Seconds</p>
+                            </article>
+                        </li>
+                    </ul>
+                    <!-- Countdown end-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

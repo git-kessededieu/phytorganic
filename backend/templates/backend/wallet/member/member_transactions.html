@@ -1,0 +1,70 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4>
+                            <i class="fa fa-money"></i> {{ page_info }}
+                            {% if wallet == 'wallet1' %}
+                                (Wallet 1 balance : ${{ member.member_wallet.wallet1 }})
+                            {% else %}
+                                (Wallet 2 balance : ${{ member.member_wallet.wallet2 }})
+                            {% endif %}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="table-responsive">
+                        <!-- Table -->
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Description</th>
+                                <th>Green Wallet</th>
+                                <th>Credit</th>
+                                <th>Debit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for tnx in tnx_list %}
+                                <tr>
+                                    <td>{{ tnx.tnx_date }}</td>
+                                    <td>{{ tnx.origin }}</td>
+                                    <td>{{ tnx.sender.username|default:"PhytOrganic" }}
+                                        => {{ tnx.receiver.username|default:"PhytOrganic" }}</td>
+                                    <td>{{ tnx.get_wallet_display }}</td>
+                                    <td>
+                                        {% if tnx.type == 'credit' %}
+                                            ${{ tnx.amount }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if tnx.type == 'debit' %}
+                                            ${{ tnx.amount }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if is_paginated %}
+                        {% include 'backend/partials/pagination.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

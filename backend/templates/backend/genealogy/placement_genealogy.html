@@ -1,0 +1,102 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="padding-top-50 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-heading">
+                        <h4><i class="fa fa-child"></i> {{ page_info }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default placement_genealogy_panel" style="border: 0; box-shadow: unset;">
+                        {% if not is_member %}
+                            <div class="panel-heading text-center">
+                                <h3 class="panel-title"><i class="fa fa-arrow-left"></i> <a href="#" class="go_back">Go
+                                    back</a></h3>
+                            </div>
+                        {% endif %}
+                        <div class="panel-body">
+                            <div id="chart_div"></div>
+
+                            <script type="text/javascript" src="{% static 'backend/js/google-loader.js' %}"></script>
+                            <script type="text/javascript">
+                                google.charts.load('current', {packages: ["orgchart"]});
+                                google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+                                    var data = new google.visualization.DataTable();
+                                    data.addColumn('string', 'Name');
+                                    data.addColumn('string', 'Manager');
+                                    data.addColumn('string', 'ToolTip');
+
+                                    // For each orgchart box, provide the name, manager, and tooltip to show.
+                                    data.addRows([
+
+                                        {% for descendant in descendants %}
+                                            [
+                                                {
+                                                    v: "{{ descendant.username|lower }}",
+                                                    f: '<a {% if descendant.username != member.username %}href="{% url 'backend:member-placement-genealogy' descendant.username %}"{% else %}{{ descendant.username }}{% endif %}><strong>{{ descendant.username }}</strong></a>' +
+                                                        {% if descendant.status == 0 %}
+                                                            '<div>INACTIVE</div>' +
+                                                        {% endif %}
+                                                        '<div>{{ descendant.grade }}</div>' +
+                                                        '<div style="color: green;">{{ descendant.members_left|default:0 }}/{{ descendant.members_right|default:0 }}</div>' +
+                                                        '<div style="color: red;">{{ descendant.bv_left|default:0 }}/{{ descendant.bv_right|default:0 }}</div>'
+                                                },
+                                                "{{ descendant.placement_name|lower }}",
+                                                "{{ descendant.full_name }}"
+                                            ],
+                                        {% endfor %}
+                                    ]);
+
+                                    // Create the chart.
+                                    var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+                                    // Draw the chart, setting the allowHtml option to true for the tooltips.
+                                    chart.draw(data, {
+                                        allowHtml: true,
+                                        allowCollapse: true,
+                                        size: 'medium'
+                                    });
+                                }
+
+                                var MY_SELECTOR = "table.google-visualization-orgchart-table"; // Could be any selector
+
+                                var observer = new MutationObserver(function (mutations) {
+                                    for (var i = 0; i < mutations.length; i++) {
+                                        for (var j = 0; j < mutations[i].addedNodes.length; j++) {
+                                            // We're iterating through _all_ the elements as the parser parses them,
+                                            // deciding if they're the one we're looking for.
+                                            try {
+                                                if (mutations[i].addedNodes[j].matches(MY_SELECTOR)) {
+                                                    {% if not is_root %}
+                                                        $("table.google-visualization-orgchart-table").find('tr').slice(1, 4).css("display", "none");
+                                                    {% endif %}
+
+                                                    // We found our element, we're done:
+                                                    observer.disconnect();
+                                                }
+                                            } catch (e) {
+                                            }
+                                        }
+                                    }
+                                });
+
+                                observer.observe(document.documentElement, {
+                                    childList: true,
+                                    subtree: true
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

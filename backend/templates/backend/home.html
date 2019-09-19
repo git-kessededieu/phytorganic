@@ -1,0 +1,132 @@
+{% extends 'backend/layouts/index.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}{{ page_title|default:"Welcome to PhytOrganic" }}{% endblock %}
+{% block content %}
+    <section class="process padding-bottom-80">
+        <div class="container">
+            <div class="panel panel-default margin-top-30">
+                <!-- Default panel contents -->
+                <div class="panel-heading"><h3 class="panel-title">{{ page_info }}</h3></div>
+                <div class="panel-body">
+                    {% if member.status %}
+                        {% for member_counter in member_counters %}
+                            {% include 'backend/partials/counters/counter.html' %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            Your account is not activated yet, please make your first purchase of BV to activate it !
+                        </div>
+                    {% endif %}
+                    <div class="table-responsive">
+                        <!-- Table -->
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Left</th>
+                                <td>{{ member.member_bv.left }}</td>
+                                <th>Right</th>
+                                <td>{{ member.member_bv.right }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    {% if member.grade == "diamond" %}
+                        <div class="panel panel-success">
+                            <div class="panel-heading text-center">
+                                <h3 class="panel-title">Monthly POOL 10 Bonus Qualification</h3>
+                                {% comment %}<font size="2px">Note : For computation of Booster Fast Start bonus, matched
+                                Platinum's PP will not be counted in the group of 1390PP.
+                            </font>{% endcomment %}
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered text-center">
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2" width="50%"><strong>No. of Diamond Direct Sponsor </strong></td>
+                                        <td colspan="2" width="50%"><strong>{% now "F" %}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Left</strong></td>
+                                        <td><strong>Right</strong></td>
+                                        <td><strong>Pool</strong></td>
+                                        <td><strong>N° Qualified Members</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>$0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="panel panel-success">
+                        <div class="panel-heading text-center">
+                            <h3 class="panel-title">Account Summary</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered text-center">
+                                <tbody>
+                                <tr>
+                                    <td style="width: 50%;"><strong>Username:</strong></td>
+                                    <td>{{ member.username }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 50%;"><strong>Name:</strong></td>
+                                    <td>{{ member.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Member ID:</strong></td>
+                                    <td>
+                                        {% if member.id < 1000 %}
+                                            {{ member.id|stringformat:"04d" }}
+                                        {% else %}
+                                            {{ member.id }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Date Joined:</strong></td>
+                                    <td>{{ member.created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Personal Volume:</strong></td>
+                                    <td>${{ member.member_wallet.wallet1|intcomma|default:0 }}</td>
+                                </tr>
+                                {% comment %}<tr>
+                                    <td><strong>Ranking:</strong></td>
+                                    <td>
+                                        {% if member.id < 1000 %}
+                                            {{ member.id|stringformat:"04d" }}
+                                        {% else %}
+                                            {{ member.id }}
+                                        {% endif %}
+                                    </td>
+                                </tr>{% endcomment %}
+                                <tr>
+                                    <td><strong>Membership:</strong></td>
+                                    <td>{{ member.get_grade_display }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status:</strong></td>
+                                    <td>{{ member.leadership|default_if_none:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Green Wallet 1:</strong></td>
+                                    <td>${{ member.member_wallet.wallet1|intcomma|default:0 }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Green Wallet 2:</strong></td>
+                                    <td>${{ member.member_wallet.wallet2|intcomma|default:0 }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
